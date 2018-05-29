@@ -1,8 +1,8 @@
 package main
 
 import (
-	"github.com/fatih/structs"
 	"fmt"
+	"github.com/fatih/structs"
 	"strings"
 )
 
@@ -12,21 +12,21 @@ type Event struct {
 	Level    string
 }
 
-type Location struct{
+type Location struct {
 	Longitude float64
 	Latitude  float64
 }
 
 func main() {
 	e := &Event{
-		Name:"test_event",
-		Location:&Location{
-			Longitude:3.87,
-			Latitude:4.65,
+		Name: "test_event",
+		Location: &Location{
+			Longitude: 3.87,
+			Latitude:  4.65,
 		},
-		Level:"event",
+		Level: "event",
 	}
 	m := structs.Map(e)
-	fmt.Printf("%v\n",m)
+	fmt.Printf("%v\n", m)
 	fmt.Println(strings.ToLower("Hello_World"))
 }

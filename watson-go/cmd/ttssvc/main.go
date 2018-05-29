@@ -1,11 +1,11 @@
 package main
 
 import (
+	"fmt"
 	"github.com/oshankfriends/go-examples/watson-go"
 	"github.com/oshankfriends/go-examples/watson-go/authentication"
 	"io/ioutil"
 	"net/http"
-	"fmt"
 )
 
 func main() {
@@ -18,5 +18,5 @@ func main() {
 	if err == nil {
 		ioutil.WriteFile("sample.wav", body, 0666)
 	}
-	fmt.Println("Error : ",err)
+	fmt.Println("Error : ", err)
 }

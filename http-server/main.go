@@ -1,23 +1,23 @@
 package main
 
 import (
-	"net/http"
 	"fmt"
+	"net/http"
 )
 
 type CountHandler struct {
-	count   int
+	count int
 }
 
-func(c *CountHandler)ServeHTTP(w http.ResponseWriter,r *http.Request){
-	c.count ++
+func (c *CountHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
+	c.count++
 
-	w.Header().Set("User-Agent","GoServer")
+	w.Header().Set("User-Agent", "GoServer")
 	w.WriteHeader(http.StatusFound)
-	fmt.Fprint(w,c.count)
+	fmt.Fprint(w, c.count)
 }
 
-func main(){
-	http.Handle("/count",&CountHandler{})
-	http.ListenAndServe(":8000",nil)
+func main() {
+	http.Handle("/count", &CountHandler{})
+	http.ListenAndServe(":8000", nil)
 }

@@ -4,8 +4,8 @@ import (
 	"github.com/dghubble/sling"
 	"github.com/gorilla/websocket"
 	"github.com/oshankfriends/go-examples/watson-go/authentication"
-	"net/http"
 	"log"
+	"net/http"
 	"time"
 )
 
@@ -40,8 +40,8 @@ func (tts *TTSService) Synthesize(text string, voice string, accept string) (*we
 	if err != nil {
 		return nil, nil, err
 	}
-	log.Println("Dialing...",req.URL)
-	conn, _, err := websocket.DefaultDialer.Dial(req.URL.String(), http.Header{"Origin":[]string{"wss://stream.watsonplatform.net"}})
+	log.Println("Dialing...", req.URL)
+	conn, _, err := websocket.DefaultDialer.Dial(req.URL.String(), http.Header{"Origin": []string{"wss://stream.watsonplatform.net"}})
 	if err != nil {
 		return nil, nil, err
 	}

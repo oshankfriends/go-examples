@@ -10,8 +10,8 @@ import (
 func New() *http.ServeMux {
 	router := http.NewServeMux()
 	loginFs := http.FileServer(http.Dir("public/login"))
-	homeFs  := http.FileServer(http.Dir("public/home"))
-	router.Handle("/home/",http.StripPrefix("/home/",homeFs))
+	homeFs := http.FileServer(http.Dir("public/home"))
+	router.Handle("/home/", http.StripPrefix("/home/", homeFs))
 	//router.Handle("/home", &templates.TemplateHandler{FileName: "index.html", Once: &sync.Once{}})
 	router.Handle("/login/", http.StripPrefix("/login/", loginFs))
 	router.HandleFunc("/auth/callback/google", googleCallBackHandler)

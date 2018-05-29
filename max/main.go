@@ -6,7 +6,7 @@ func main() {
 	var a = []int{2, 34, 2, 56, 23, 56, 7, 87, 5, 10}
 	var max = findMax(a, 0, len(a)-1)
 	fmt.Println("max val :", max)
-	fmt.Println("max num in arr :",findMaxNum(a))
+	fmt.Println("max num in arr :", findMaxNum(a))
 }
 
 //Normal Divide and conquer
@@ -29,7 +29,7 @@ func findMaxNum(arr []int) int {
 		return arr[0]
 	}
 	max1 := findMaxNum(arr[:len(arr)/2])
-	max2 := findMaxNum(arr[len(arr)/2 :])
+	max2 := findMaxNum(arr[len(arr)/2:])
 	if max1 > max2 {
 		return max1
 	}

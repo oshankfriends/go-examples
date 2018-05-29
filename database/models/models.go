@@ -2,8 +2,8 @@ package models
 
 import (
 	"database/sql"
-	"time"
 	"github.com/jinzhu/gorm"
+	"time"
 )
 
 type Company struct {
@@ -23,14 +23,14 @@ type Employee struct {
 }
 
 type Address struct {
-	Country  string       `gorm:"primary_key"`
-	City     string       `gorm:"primary_key"`
-	PostCode string       `gorm:"primary_key"`
+	Country  string `gorm:"primary_key"`
+	City     string `gorm:"primary_key"`
+	PostCode string `gorm:"primary_key"`
 	Line1    sql.NullString
 	Line2    sql.NullString
 }
 
-func CreateTable(db *gorm.DB){
+func CreateTable(db *gorm.DB) {
 	db.CreateTable(&Company{})
 	db.CreateTable(&Employee{})
 	db.CreateTable(&Address{})

@@ -23,7 +23,7 @@ func main() {
 	if err = db.DB().Ping(); err != nil {
 		panic(err)
 	}
-//	models.CreateTable(db)
+	//	models.CreateTable(db)
 	sampleCompany := models.Company{
 		Name: "Yahoo",
 		Address: models.Address{
@@ -33,8 +33,8 @@ func main() {
 		},
 		Employees: []models.Employee{
 			{
-				FirstName:        "John",
-				LastName:         "Doe",
+				FirstName:    "John",
+				LastName:     "Doe",
 				AdhaarNumber: "00-000-0000",
 			},
 		},

@@ -9,4 +9,3 @@ type TTSRequest struct {
 	Text   string `json:"text"`
 	Accept string `json:"accept"`
 }
-

@@ -6,9 +6,9 @@ import (
 	"github.com/gorilla/websocket"
 	"github.com/oshankfriends/go-examples/watson-go/authentication"
 	"io"
-	"log"
 	"net/http"
 	"net/url"
+	"github.com/sirupsen/logrus"
 )
 
 const defaultVersion = "v1"
@@ -42,7 +42,6 @@ func (asr *ASRService) Stream(message map[string]interface{}, contentType string
 	if err != nil {
 		return nil, nil, err
 	}
-	log.Print("auth token :", token)
 	uri, err := url.Parse(asr.AuthSet.Creds.Url)
 	if err != nil {
 		return nil, nil, err
@@ -57,12 +56,12 @@ func (asr *ASRService) Stream(message map[string]interface{}, contentType string
 	queryValues.Set("model", model)
 	uri.RawQuery = queryValues.Encode()
 
-	log.Println("dialing...", uri)
+	logrus.Debug("dialing...", uri)
 	conn, _, err := asr.dialer.Dial(uri.String(), headers)
 	if err != nil {
 		return nil, nil, err
 	}
-	log.Printf("Websocket Conn created Local addr : %s, Remote Addr : %s \n", conn.LocalAddr(), conn.RemoteAddr())
+	logrus.Debugf("Websocket Conn created Local addr : %s, Remote Addr : %s \n", conn.LocalAddr(), conn.RemoteAddr())
 	respChan := make(chan SpeechRecognizeResponse, 10)
 	s := &Stream{
 		EventChan:         respChan,
@@ -113,6 +112,11 @@ func (s *Stream) readResponse() {
 	for {
 		var speechResp SpeechRecognizeResponse
 		if err := s.Conn.ReadJSON(&speechResp); err != nil {
+			logrus.Errorf("Stream.readResponse err : %v",err)
+			if wsErr,ok := err.(*websocket.CloseError); ok && wsErr.Code == 1011 {
+				close(s.EventChan)
+				return
+			}
 			continue
 		}
 		if s.Stopped {
